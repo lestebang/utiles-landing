@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UtilEs — Tu saldo, sin sorpresas</title>
+<meta name="description" content="UtilEs administra tu saldo, bono y recargas de ETECSA, Transfermóvil y Enzona desde un solo lugar, con activación automática al instante.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%230B2942%22/><text x=%2250%22 y=%2266%22 font-size=%2258%22 font-family=%22monospace%22 fill=%22%234FB3A9%22 text-anchor=%22middle%22>U</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-950:#081C2E;
+    --navy-900:#0B2942;
+    --navy-700:#123B5E;
+    --teal-600:#1F7A76;
+    --teal-500:#2C948F;
+    --teal-400:#4FB3A9;
+    --forest-600:#2F6F4F;
+    --mist-50:#F2F6F5;
+    --paper-0:#FFFFFF;
+    --ink-900:#10202B;
+    --ink-500:#52697A;
+    --line:#DDE6E4;
+    --radius-lg:22px;
+    --radius-md:14px;
+    --shadow-card:0 18px 40px -22px rgba(8,28,46,0.35);
+    --ff-display:'Space Grotesk', system-ui, sans-serif;
+    --ff-body:'Inter', system-ui, sans-serif;
+    --ff-mono:'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:var(--ff-body);
+    background:var(--mist-50);
+    color:var(--ink-900);
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+  :focus-visible{outline:3px solid var(--teal-400);outline-offset:3px;border-radius:6px;}
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+  .eyebrow{
+    font-family:var(--ff-mono);
+    font-size:12.5px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    font-weight:600;
+  }
+
+  /* ---------- NAV ---------- */
+  header.site{
+    position:sticky;top:0;z-index:50;
+    background:rgba(242,246,245,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 28px;max-width:1180px;margin:0 auto;
+  }
+  .brand{
+    display:flex;align-items:center;gap:10px;
+    font-family:var(--ff-display);font-weight:700;font-size:20px;
+    text-decoration:none;color:var(--navy-900);
+  }
+  .brand .dot{
+    width:11px;height:11px;border-radius:3px;background:var(--teal-500);
+    box-shadow:0 0 0 4px rgba(44,148,143,0.16);
+  }
+  .nav-links{display:flex;gap:32px;list-style:none;margin:0;padding:0;}
+  .nav-links a{
+    text-decoration:none;font-size:14.5px;font-weight:500;color:var(--ink-500);
+    transition:color .15s ease;
+  }
+  .nav-links a:hover{color:var(--navy-900);}
+  .nav-cta{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--navy-900);color:#fff;
+    padding:10px 18px;border-radius:100px;
+    font-size:14px;font-weight:600;text-decoration:none;
+    transition:transform .15s ease, background .15s ease;
+  }
+  .nav-cta:hover{background:var(--navy-700);transform:translateY(-1px);}
+  .nav-toggle{display:none;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:76px 0 40px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;top:-220px;right:-180px;width:560px;height:560px;
+    background:radial-gradient(circle, rgba(79,179,169,0.16), transparent 68%);
+    pointer-events:none;
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1.05fr 0.95fr;gap:56px;align-items:center;
+    position:relative;
+  }
+  .hero-copy .eyebrow{color:var(--teal-600);margin-bottom:18px;display:flex;align-items:center;gap:9px;}
+  .hero-copy .eyebrow::before{
+    content:"";width:7px;height:7px;border-radius:50%;background:var(--forest-600);
+    box-shadow:0 0 0 3px rgba(47,111,79,0.18);
+    animation:pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{box-shadow:0 0 0 3px rgba(47,111,79,0.18);}
+    50%{box-shadow:0 0 0 6px rgba(47,111,79,0.08);}
+  }
+  h1{
+    font-family:var(--ff-display);
+    font-weight:700;
+    font-size:clamp(38px, 5vw, 58px);
+    line-height:1.05;
+    letter-spacing:-0.01em;
+    margin:0 0 22px;
+    color:var(--navy-950);
+  }
+  h1 em{
+    font-style:normal;
+    color:var(--teal-600);
+    position:relative;
+  }
+  .hero-copy p.lead{
+    font-size:17.5px;line-height:1.65;color:var(--ink-500);
+    max-width:480px;margin:0 0 32px;
+  }
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:38px;}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:14px 24px;border-radius:100px;
+    font-size:15px;font-weight:600;text-decoration:none;
+    border:1px solid transparent;
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .btn-primary{background:var(--navy-900);color:#fff;box-shadow:0 14px 28px -14px rgba(11,41,66,0.55);}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 32px -14px rgba(11,41,66,0.6);}
+  .btn-ghost{background:transparent;color:var(--navy-900);border-color:var(--navy-900);}
+  .btn-ghost:hover{background:var(--navy-900);color:#fff;}
+  .btn-download{background:var(--teal-600);color:#fff;box-shadow:0 14px 28px -14px rgba(31,122,118,0.55);}
+  .btn-download:hover{background:var(--teal-500);transform:translateY(-2px);box-shadow:0 18px 32px -14px rgba(31,122,118,0.6);}
+  .btn-download svg{flex-shrink:0;}
+  .btn-meta{
+    font-family:var(--ff-mono);font-size:11.5px;color:var(--ink-500);
+    display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap;
+  }
+  .btn-meta .sep{opacity:.5;}
+
+  .provider-row{display:flex;gap:10px;flex-wrap:wrap;}
+  .provider-chip{
+    font-family:var(--ff-mono);font-size:12.5px;font-weight:500;
+    padding:8px 14px;border-radius:100px;border:1px solid var(--line);
+    background:var(--paper-0);color:var(--ink-500);
+  }
+
+  /* phone mockup */
+  .phone-stage{
+    position:relative;display:flex;justify-content:center;
+  }
+  .phone-frame{
+    width:280px;border-radius:36px;background:var(--navy-950);
+    padding:10px;box-shadow:var(--shadow-card), 0 0 0 1px rgba(8,28,46,0.06);
+    position:relative;
+    transform:rotate(1.2deg);
+  }
+  .phone-screen{
+    border-radius:28px;overflow:hidden;background:#fff;
+    aspect-ratio:9/19.5;
+  }
+  .phone-screen img{width:100%;height:100%;object-fit:cover;object-position:top;}
+  .float-badge{
+    position:absolute;background:var(--paper-0);
+    border:1px solid var(--line);border-radius:14px;
+    padding:11px 15px;box-shadow:var(--shadow-card);
+    font-size:12.5px;display:flex;align-items:center;gap:9px;
+    font-weight:600;
+  }
+  .float-badge .ind{width:8px;height:8px;border-radius:50%;background:var(--forest-600);flex-shrink:0;}
+  .badge-top{top:8%;left:-42px;animation:float1 6s ease-in-out infinite;}
+  .badge-bottom{bottom:12%;right:-30px;animation:float2 7s ease-in-out infinite;}
+  @keyframes float1{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+  @keyframes float2{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+
+  /* ---------- SIGNATURE: SMS PARSER DEMO ---------- */
+  .parser-section{padding:30px 0 90px;}
+  .parser-card{
+    background:var(--navy-950);
+    border-radius:28px;
+    padding:44px;
+    color:#fff;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+    position:relative;
+    overflow:hidden;
+  }
+  .parser-card::after{
+    content:"";position:absolute;inset:0;
+    background:
+      linear-gradient(180deg, rgba(79,179,169,0.10), transparent 40%),
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 64px);
+    pointer-events:none;
+  }
+  .parser-head{grid-column:1/-1;margin-bottom:6px;}
+  .parser-head .eyebrow{color:var(--teal-400);margin-bottom:12px;}
+  .parser-head h2{
+    font-family:var(--ff-display);font-size:clamp(24px,3vw,32px);
+    margin:0 0 10px;font-weight:600;max-width:640px;
+  }
+  .parser-head p{color:#B7C6CE;font-size:15px;line-height:1.6;max-width:560px;margin:0;}
+
+  .terminal{
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.09);
+    border-radius:16px;
+    padding:22px;
+    font-family:var(--ff-mono);
+    font-size:13px;
+    line-height:1.7;
+    min-height:190px;
+    position:relative;
+    z-index:1;
+  }
+  .terminal .dots{display:flex;gap:6px;margin-bottom:16px;}
+  .terminal .dots span{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,0.16);}
+  #sms-text{color:#CFE8E4;white-space:pre-wrap;word-break:break-word;}
+  #sms-text .cursor{display:inline-block;width:7px;height:14px;background:var(--teal-400);margin-left:2px;vertical-align:middle;animation:blink 1s step-start infinite;}
+  @keyframes blink{50%{opacity:0;}}
+
+  .result-panel{
+    z-index:1;
+    display:flex;flex-direction:column;gap:10px;
+    justify-content:center;
+  }
+  .result-row{
+    display:flex;align-items:center;justify-content:space-between;
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:12px;padding:13px 16px;
+    opacity:0;transform:translateY(8px);
+    transition:opacity .5s ease, transform .5s ease;
+  }
+  .result-row.show{opacity:1;transform:translateY(0);}
+  .result-row .k{font-size:11.5px;color:#8FA3AD;font-family:var(--ff-mono);letter-spacing:.06em;text-transform:uppercase;}
+  .result-row .v{font-family:var(--ff-mono);font-weight:600;font-size:14px;}
+  .result-row .v.ok{color:var(--teal-400);}
+  .status-line{
+    display:flex;align-items:center;gap:9px;font-size:13px;color:#8FA3AD;
+    font-family:var(--ff-mono);margin-top:4px;
+  }
+  .status-line .ind{width:7px;height:7px;border-radius:50%;background:#3a4a53;flex-shrink:0;transition:background .3s ease, box-shadow .3s ease;}
+  .status-line.active .ind{background:var(--forest-600);box-shadow:0 0 0 3px rgba(47,111,79,0.25);}
+
+  /* ---------- SECTION HEADS ---------- */
+  .section{padding:88px 0;}
+  .section-head{max-width:640px;margin:0 0 52px;}
+  .section-head .eyebrow{color:var(--teal-600);margin-bottom:14px;}
+  .section-head h2{
+    font-family:var(--ff-display);font-weight:600;
+    font-size:clamp(26px,3.2vw,36px);margin:0 0 14px;color:var(--navy-950);
+    letter-spacing:-0.01em;
+  }
+  .section-head p{color:var(--ink-500);font-size:16px;line-height:1.65;margin:0;}
+
+  /* ---------- FEATURES ---------- */
+  .feature-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:18px;
+  }
+  .feature-card{
+    background:var(--paper-0);border:1px solid var(--line);
+    border-radius:var(--radius-lg);padding:26px 22px;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .feature-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-card);}
+  .feature-icon{
+    width:44px;height:44px;border-radius:12px;
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:18px;font-size:19px;
+  }
+  .ic-teal{background:#E4F3F1;color:var(--teal-600);}
+  .ic-forest{background:#E7F1EB;color:var(--forest-600);}
+  .ic-navy{background:#E7ECF1;color:var(--navy-700);}
+  .feature-card h3{font-family:var(--ff-display);font-size:17px;margin:0 0 8px;font-weight:600;}
+  .feature-card p{font-size:14px;color:var(--ink-500);line-height:1.6;margin:0;}
+
+  /* ---------- PROVIDERS ---------- */
+  .provider-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .provider-card{
+    border-radius:var(--radius-lg);padding:28px 24px;
+    border:1px solid var(--line);background:var(--paper-0);
+    position:relative;overflow:hidden;
+  }
+  .provider-card .tag{
+    font-family:var(--ff-mono);font-size:11px;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--ink-500);
+    display:inline-block;margin-bottom:16px;
+    border:1px solid var(--line);border-radius:100px;padding:5px 11px;
+  }
+  .provider-card h3{font-family:var(--ff-display);font-size:19px;margin:0 0 10px;}
+  .provider-card p{font-size:13.5px;color:var(--ink-500);line-height:1.6;margin:0 0 16px;}
+  .provider-sms{
+    font-family:var(--ff-mono);font-size:12px;color:var(--navy-700);
+    background:var(--mist-50);border:1px dashed var(--line);
+    border-radius:10px;padding:10px 12px;line-height:1.55;
+  }
+  .provider-card.etecsa{border-top:3px solid var(--teal-600);}
+  .provider-card.tm{border-top:3px solid var(--navy-700);}
+  .provider-card.enzona{border-top:3px solid var(--forest-600);}
+
+  /* ---------- TRUST ---------- */
+  .trust{
+    background:var(--navy-900);border-radius:28px;
+    padding:52px 48px;color:#fff;
+    display:grid;grid-template-columns:1fr 1fr 1fr;gap:36px;
+  }
+  .trust-item .num{font-family:var(--ff-mono);color:var(--teal-400);font-size:13px;margin-bottom:10px;letter-spacing:.06em;}
+  .trust-item h4{font-family:var(--ff-display);font-size:17px;margin:0 0 8px;font-weight:600;}
+  .trust-item p{font-size:13.5px;color:#B7C6CE;line-height:1.6;margin:0;}
+
+  /* ---------- CTA ---------- */
+  .cta-section{padding:100px 0 80px;text-align:center;}
+  .cta-section h2{
+    font-family:var(--ff-display);font-size:clamp(28px,4vw,42px);
+    font-weight:600;margin:0 0 16px;color:var(--navy-950);letter-spacing:-0.01em;
+  }
+  .cta-section p{color:var(--ink-500);font-size:16px;margin:0 0 34px;}
+  .cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+  .cta-note{font-family:var(--ff-mono);font-size:12px;color:var(--ink-500);margin-top:20px;}
+
+  /* ---------- FOOTER ---------- */
+  footer{border-top:1px solid var(--line);padding:40px 0;}
+  .foot-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+  .foot-brand{font-family:var(--ff-display);font-weight:700;font-size:16px;}
+  .foot-links{display:flex;gap:24px;list-style:none;padding:0;margin:0;}
+  .foot-links a{font-size:13.5px;color:var(--ink-500);text-decoration:none;}
+  .foot-links a:hover{color:var(--navy-900);}
+  .foot-meta{font-family:var(--ff-mono);font-size:12px;color:var(--ink-500);margin-top:18px;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+  }
+
+  @media (max-width: 920px){
+    .hero-grid{grid-template-columns:1fr;}
+    .phone-stage{order:-1;margin-bottom:12px;}
+    .parser-card{grid-template-columns:1fr;}
+    .feature-grid{grid-template-columns:repeat(2,1fr);}
+    .provider-grid{grid-template-columns:1fr;}
+    .trust{grid-template-columns:1fr;padding:36px 28px;}
+    .nav-links{display:none;}
+    .float-badge{display:none;}
+  }
+  @media (max-width:560px){
+    .feature-grid{grid-template-columns:1fr;}
+    .wrap{padding:0 20px;}
+    .parser-card{padding:28px 22px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <nav class="nav">
+    <a href="#top" class="brand"><span class="dot"></span>UtilEs</a>
+    <ul class="nav-links">
+      <li><a href="#como-funciona">Cómo funciona</a></li>
+      <li><a href="#proveedores">Proveedores</a></li>
+      <li><a href="#confianza">Seguridad</a></li>
+    </ul>
+    <a href="#descarga" class="nav-cta">Obtener la app →</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero wrap">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow">ETECSA · TRANSFERMÓVIL · ENZONA</div>
+        <h1>Tu saldo, sin<br><em>sorpresas.</em></h1>
+        <p class="lead">UtilEs junta tu saldo, bono, recargas y transferencias en una sola pantalla clara — y activa tu plan al instante en cuanto llega la confirmación de pago.</p>
+        <div class="hero-actions">
+          <a href="assets/UtilEs.apk" download class="btn btn-download">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>
+            Descarga manual (.apk)
+          </a>
+          <a href="#como-funciona" class="btn btn-ghost">Ver cómo funciona</a>
+        </div>
+        <div class="btn-meta">v1.2.7 <span class="sep">·</span> 8.4 MB <span class="sep">·</span> Android 5.0+ <span class="sep">·</span> fuera de Play Store</div>
+        <div class="provider-row">
+          <span class="provider-chip">✓ SMS de ETECSA</span>
+          <span class="provider-chip">✓ SMS de Transfermóvil</span>
+          <span class="provider-chip">✓ SMS de Enzona</span>
+        </div>
+      </div>
+      <div class="phone-stage">
+        <div class="float-badge badge-top"><span class="ind"></span>Plan activado</div>
+        <div class="phone-frame">
+          <div class="phone-screen">
+            <img src="assets/utiles-screenshot.jpg" alt="Pantalla principal de la app UtilEs mostrando saldo, bono y opciones de recarga">
+          </div>
+        </div>
+        <div class="float-badge badge-bottom"><span class="ind"></span>+50 MB de bono</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SIGNATURE: SMS PARSER -->
+  <section class="parser-section wrap">
+    <div class="parser-card">
+      <div class="parser-head">
+        <div class="eyebrow">CÓMO SE ACTIVA TU SALDO</div>
+        <h2>De un SMS de confirmación a saldo activo, en segundos.</h2>
+        <p>Cada proveedor cubano envía sus confirmaciones en un formato distinto. UtilEs lee el contenido del mensaje — no el remitente, que cambia — y activa tu licencia sin que tengas que hacer nada más.</p>
+      </div>
+
+      <div class="terminal">
+        <div class="dots"><span></span><span></span><span></span></div>
+        <div id="sms-text"></div>
+      </div>
+
+      <div class="result-panel">
+        <div class="result-row" data-row="1"><span class="k">Proveedor</span><span class="v" id="v-provider">—</span></div>
+        <div class="result-row" data-row="2"><span class="k">Monto</span><span class="v" id="v-amount">—</span></div>
+        <div class="result-row" data-row="3"><span class="k">Estado</span><span class="v ok" id="v-status">—</span></div>
+        <div class="status-line" id="status-line"><span class="ind"></span><span id="status-caption">Esperando confirmación…</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="section wrap" id="como-funciona">
+    <div class="section-head">
+      <div class="eyebrow">EN LA APP</div>
+      <h2>Todo lo que revisas a diario, en un solo lugar.</h2>
+      <p>Saldo, bono, recargas, transferencias y llamadas — sin cambiar entre apps ni marcar códigos de memoria.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon ic-teal">◆</div>
+        <h3>Saldo &amp; Bono</h3>
+        <p>Consulta tu saldo nacional y tu bono de datos con sus fechas de vencimiento, actualizados al momento.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon ic-navy">↻</div>
+        <h3>Recarga de saldo</h3>
+        <p>Ingresa o escanea el código de recarga y listo — sin pasos de más ni menús confusos.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon ic-forest">⇅</div>
+        <h3>Transferencia</h3>
+        <p>Envía saldo a otro número con PIN guardado, confirmación clara y control del monto exacto.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon ic-teal">☎</div>
+        <h3>Llamadas rápidas</h3>
+        <p>Marcación directa, Asterisco 99 libre de costo, y modo anónimo para ocultar tu número.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROVIDERS -->
+  <section class="section wrap" id="proveedores">
+    <div class="section-head">
+      <div class="eyebrow">COMPATIBILIDAD</div>
+      <h2>Reconoce los tres formatos de pago cubanos.</h2>
+      <p>UtilEs clasifica cada confirmación por el contenido del mensaje, porque Transfermóvil y Enzona usan remitentes que cambian constantemente.</p>
+    </div>
+    <div class="provider-grid">
+      <div class="provider-card etecsa">
+        <span class="tag">P2P</span>
+        <h3>ETECSA</h3>
+        <p>Confirmaciones de saldo móvil directas del operador nacional.</p>
+        <div class="provider-sms">"Ha transferido 500.00 CUP a 5XXXXXXX..."</div>
+      </div>
+      <div class="provider-card tm">
+        <span class="tag">BANCARIO</span>
+        <h3>Transfermóvil</h3>
+        <p>Pagos desde cuenta bancaria, identificados por remitente dinámico.</p>
+        <div class="provider-sms">"Operacion realizada por 500.00 CUP..."</div>
+      </div>
+      <div class="provider-card enzona">
+        <span class="tag">BILLETERA</span>
+        <h3>Enzona</h3>
+        <p>Pagos desde billetera digital, con su propio formato de confirmación.</p>
+        <div class="provider-sms">"Enzona: pago recibido 500.00 CUP..."</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST -->
+  <section class="section wrap" id="confianza">
+    <div class="trust">
+      <div class="trust-item">
+        <div class="num">01</div>
+        <h4>La app nunca escribe directo</h4>
+        <p>Cada activación pasa por una función protegida del servidor — la app cliente solo puede pedir, nunca modificar tu licencia por su cuenta.</p>
+      </div>
+      <div class="trust-item">
+        <div class="num">02</div>
+        <h4>Reglas de acceso por usuario</h4>
+        <p>Tus datos están protegidos con reglas de seguridad a nivel de fila: solo tú puedes ver tu propio saldo y tus propias solicitudes.</p>
+      </div>
+      <div class="trust-item">
+        <div class="num">03</div>
+        <h4>Actualización en tiempo real</h4>
+        <p>En cuanto tu pago se confirma, el cambio de estado te llega al instante — sin recargar ni refrescar nada.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section wrap" id="descarga">
+    <h2>Lleva tu saldo contigo.</h2>
+    <p>Aún no está en Play Store — instálala manualmente mientras tanto.</p>
+    <div class="cta-actions">
+      <a href="assets/UtilEs.apk" download class="btn btn-download">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>
+        Descarga manual (.apk)
+      </a>
+      <a href="mailto:hola@apputiles.com?subject=Quiero%20probar%20UtilEs" class="btn btn-ghost">Avísenme cuando esté en Play Store</a>
+    </div>
+    <div class="btn-meta" style="justify-content:center;">v1.2.7 <span class="sep">·</span> 8.4 MB <span class="sep">·</span> Requiere permitir "orígenes desconocidos" en Ajustes</div>
+    <div class="cta-note">apputiles.com · hecho para usuarios en Cuba</div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-row">
+      <div class="foot-brand">UtilEs</div>
+      <ul class="foot-links">
+        <li><a href="#como-funciona">Cómo funciona</a></li>
+        <li><a href="#proveedores">Proveedores</a></li>
+        <li><a href="mailto:hola@apputiles.com">Contacto</a></li>
+      </ul>
+    </div>
+    <div class="foot-meta">© 2026 UtilEs · apputiles.com — no afiliado a ETECSA, Transfermóvil ni Enzona.</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var script = "Nueva confirmacion de pago:\n\nHa transferido 500.00 CUP\na su numero 5XXXXXXX desde\nel servicio P2P de ETECSA.\nSaldo disponible: 620.00 CUP";
+
+  var el = document.getElementById('sms-text');
+  var rows = document.querySelectorAll('.result-row');
+  var statusLine = document.getElementById('status-line');
+  var statusCaption = document.getElementById('status-caption');
+  var vProvider = document.getElementById('v-provider');
+  var vAmount = document.getElementById('v-amount');
+  var vStatus = document.getElementById('v-status');
+
+  function resetPanel(){
+    rows.forEach(function(r){ r.classList.remove('show'); });
+    statusLine.classList.remove('active');
+    statusCaption.textContent = 'Esperando confirmación…';
+    vProvider.textContent = '—';
+    vAmount.textContent = '—';
+    vStatus.textContent = '—';
+  }
+
+  function typeText(text, cb){
+    el.innerHTML = '';
+    var cursor = document.createElement('span');
+    cursor.className = 'cursor';
+    if (reduce){
+      el.textContent = text;
+      cb();
+      return;
+    }
+    var i = 0;
+    function step(){
+      el.textContent = text.slice(0, i);
+      el.appendChild(cursor);
+      i++;
+      if (i <= text.length){
+        setTimeout(step, 14);
+      } else {
+        cb();
+      }
+    }
+    step();
+  }
+
+  function revealResults(){
+    statusCaption.textContent = 'Analizando contenido del mensaje…';
+    setTimeout(function(){
+      vProvider.textContent = 'ETECSA · P2P';
+      rows[0].classList.add('show');
+    }, 350);
+    setTimeout(function(){
+      vAmount.textContent = '500.00 CUP';
+      rows[1].classList.add('show');
+    }, 750);
+    setTimeout(function(){
+      vStatus.textContent = 'ACTIVADO';
+      rows[2].classList.add('show');
+      statusLine.classList.add('active');
+      statusCaption.textContent = 'Licencia activada automáticamente';
+    }, 1200);
+  }
+
+  function cycle(){
+    resetPanel();
+    typeText(script, function(){
+      revealResults();
+      setTimeout(cycle, reduce ? 4000 : 4600);
+    });
+  }
+
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting){
+        cycle();
+        io.disconnect();
+      }
+    });
+  }, { threshold: 0.4 });
+  io.observe(document.querySelector('.parser-card'));
+})();
+</script>
+
+</body>
+</html>
