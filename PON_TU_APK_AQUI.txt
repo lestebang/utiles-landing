@@ -1,5 +1,0 @@
-Coloca aquí tu archivo firmado como "UtilEs.apk" (mismo nombre exacto)
-antes de publicar el sitio — los botones de descarga manual en index.html
-apuntan a assets/UtilEs.apk. Ver README.md → "Botón de descarga manual (.apk)".
-
-Puedes borrar este archivo una vez agregues el APK real.
