@@ -403,7 +403,7 @@
           </a>
           <a href="#como-funciona" class="btn btn-ghost">Ver cómo funciona</a>
         </div>
-        <div class="btn-meta"><span data-app-version>v1.2.7</span> <span class="sep">·</span> 8.4 MB <span class="sep">·</span> Android 5.0+ <span class="sep">·</span> fuera de Play Store</div>
+        <div class="btn-meta"><span data-app-version>v1.2.7</span> <span class="sep">·</span> <span data-app-size>8.4 MB</span> <span class="sep">·</span> Android 5.0+ <span class="sep">·</span> fuera de Play Store</div>
         <div class="provider-row">
           <span class="provider-chip">✓ SMS de ETECSA</span>
           <span class="provider-chip">✓ SMS de Transfermóvil</span>
@@ -538,7 +538,7 @@
       </a>
       <a href="mailto:hola@apputiles.com?subject=Quiero%20probar%20UtilEs" class="btn btn-ghost">Avísenme cuando esté en Play Store</a>
     </div>
-    <div class="btn-meta" style="justify-content:center;"><span data-app-version>v1.2.7</span> <span class="sep">·</span> 8.4 MB <span class="sep">·</span> Requiere permitir "orígenes desconocidos" en Ajustes</div>
+    <div class="btn-meta" style="justify-content:center;"><span data-app-version>v1.2.7</span> <span class="sep">·</span> <span data-app-size>8.4 MB</span> <span class="sep">·</span> Requiere permitir "orígenes desconocidos" en Ajustes</div>
     <div class="cta-note">apputiles.com · hecho para usuarios en Cuba</div>
   </section>
 
@@ -560,14 +560,19 @@
 
 <script>
 (function(){
-  fetch('version.txt', {cache: 'no-store'})
-    .then(function(r){ return r.ok ? r.text() : Promise.reject(); })
-    .then(function(v){
-      v = v.trim();
-      if (!v) return;
-      document.querySelectorAll('[data-app-version]').forEach(function(el){
-        el.textContent = 'v' + v;
-      });
+  fetch('version.json', {cache: 'no-store'})
+    .then(function(r){ return r.ok ? r.json() : Promise.reject(); })
+    .then(function(info){
+      if (info.version){
+        document.querySelectorAll('[data-app-version]').forEach(function(el){
+          el.textContent = 'v' + info.version;
+        });
+      }
+      if (info.size){
+        document.querySelectorAll('[data-app-size]').forEach(function(el){
+          el.textContent = info.size;
+        });
+      }
     })
     .catch(function(){ /* keep hardcoded fallback */ });
 })();
