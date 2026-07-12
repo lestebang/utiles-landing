@@ -148,6 +148,13 @@
   .btn-download{background:var(--teal-600);color:#fff;box-shadow:0 14px 28px -14px rgba(31,122,118,0.55);}
   .btn-download:hover{background:var(--teal-500);transform:translateY(-2px);box-shadow:0 18px 32px -14px rgba(31,122,118,0.6);}
   .btn-download svg{flex-shrink:0;}
+  .dl-count{
+    font-family:var(--ff-mono);font-size:11.5px;font-weight:500;
+    background:rgba(255,255,255,0.18);border-radius:100px;
+    padding:3px 9px;margin-left:2px;
+    display:none;
+  }
+  .dl-count.show{display:inline-block;}
   .btn-meta{
     font-family:var(--ff-mono);font-size:11.5px;color:var(--ink-500);
     display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap;
@@ -392,6 +399,7 @@
           <a href="assets/UtilEs.apk" download class="btn btn-download">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>
             Descarga manual (.apk)
+            <span class="dl-count" data-dl-count></span>
           </a>
           <a href="#como-funciona" class="btn btn-ghost">Ver cómo funciona</a>
         </div>
@@ -526,6 +534,7 @@
       <a href="assets/UtilEs.apk" download class="btn btn-download">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>
         Descarga manual (.apk)
+        <span class="dl-count" data-dl-count></span>
       </a>
       <a href="mailto:hola@apputiles.com?subject=Quiero%20probar%20UtilEs" class="btn btn-ghost">Avísenme cuando esté en Play Store</a>
     </div>
@@ -545,7 +554,7 @@
         <li><a href="mailto:hola@apputiles.com">Contacto</a></li>
       </ul>
     </div>
-    <div class="foot-meta">© 2026 UtilEs · apputiles.com — no afiliado a ETECSA, Transfermóvil ni Enzona.</div>
+    <div class="foot-meta">© 2026 UtilEs · apputiles.com — no afiliado a ETECSA, Transfermóvil ni Enzona.<span id="visit-count"></span></div>
   </div>
 </footer>
 
@@ -630,6 +639,41 @@
     });
   }, { threshold: 0.4 });
   io.observe(document.querySelector('.parser-card'));
+})();
+
+/* ---------- COUNTERS (Abacus — sin backend) ---------- */
+(function(){
+  var API = 'https://abacus.jasoncameron.dev';
+  var NS = 'apputiles-com';
+  var fmt = function(n){ return Number(n).toLocaleString('es'); };
+
+  function call(path, cb){
+    fetch(API + path)
+      .then(function(r){ return r.json(); })
+      .then(function(d){ if (d && typeof d.value === 'number') cb(d.value); })
+      .catch(function(){ /* sin conexión: no mostrar nada */ });
+  }
+
+  // Contador de visitas (pie de página)
+  call('/hit/' + NS + '/visitas', function(v){
+    var el = document.getElementById('visit-count');
+    if (el) el.textContent = ' · ' + fmt(v) + ' visitas';
+  });
+
+  // Contador de descargas (botones)
+  var badges = document.querySelectorAll('[data-dl-count]');
+  function paint(v){
+    badges.forEach(function(b){
+      b.textContent = fmt(v);
+      b.classList.add('show');
+    });
+  }
+  call('/get/' + NS + '/descargas', paint);
+  document.querySelectorAll('a[href$="UtilEs.apk"]').forEach(function(a){
+    a.addEventListener('click', function(){
+      call('/hit/' + NS + '/descargas', paint);
+    });
+  });
 })();
 </script>
 
