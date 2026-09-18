@@ -322,6 +322,104 @@
   .provider-card.tm{border-top:3px solid var(--navy-700);}
   .provider-card.enzona{border-top:3px solid var(--forest-600);}
 
+  /* ---------- PROMO ---------- */
+  .promo-section{padding:8px 0 30px;}
+  .promo-card{
+    --promo-gold:#F7B733;
+    --promo-gold-soft:rgba(247,183,51,0.14);
+    --promo-gold-line:rgba(247,183,51,0.32);
+    --promo-red:#FF5A4E;
+    position:relative;overflow:hidden;
+    background:
+      radial-gradient(120% 150% at 88% -20%, rgba(247,183,51,0.22), transparent 55%),
+      radial-gradient(100% 130% at -5% 115%, rgba(47,111,79,0.32), transparent 58%),
+      var(--navy-950);
+    border:1px solid rgba(247,183,51,0.22);
+    border-radius:28px;
+    padding:46px;
+    color:#fff;
+    display:grid;grid-template-columns:1.05fr 0.95fr;gap:44px;align-items:center;
+    box-shadow:0 30px 60px -34px rgba(247,183,51,0.35);
+  }
+  .promo-card::after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:repeating-linear-gradient(90deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 64px);
+  }
+  .promo-copy,.promo-side{position:relative;z-index:1;}
+  .promo-tag{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--ff-mono);font-size:11.5px;font-weight:600;
+    letter-spacing:.14em;text-transform:uppercase;
+    color:var(--promo-gold);
+    border:1px solid var(--promo-gold-line);
+    background:var(--promo-gold-soft);
+    padding:6px 13px;border-radius:100px;margin-bottom:20px;
+  }
+  .promo-tag .ind{width:7px;height:7px;border-radius:50%;background:var(--promo-gold);flex-shrink:0;}
+  .promo-tag.live{border-color:var(--promo-red);background:var(--promo-red);color:#fff;}
+  .promo-tag.live .ind{background:#fff;animation:pulsePromo 2.4s ease-in-out infinite;}
+  @keyframes pulsePromo{
+    0%,100%{box-shadow:0 0 0 3px rgba(255,90,78,0.28);}
+    50%{box-shadow:0 0 0 7px rgba(255,90,78,0.10);}
+  }
+  .promo-card h2{
+    font-family:var(--ff-display);font-weight:600;
+    font-size:clamp(26px,3.4vw,38px);line-height:1.12;letter-spacing:-0.01em;
+    margin:0 0 14px;
+  }
+  .promo-card h2 em{font-style:normal;color:var(--promo-gold);}
+  .promo-lead{color:#B7C6CE;font-size:15.5px;line-height:1.65;margin:0 0 26px;max-width:520px;}
+  .promo-lead strong{color:#fff;font-weight:600;}
+  .promo-steps{list-style:none;margin:0 0 28px;padding:0;display:flex;flex-direction:column;gap:14px;}
+  .promo-step{display:flex;gap:13px;align-items:flex-start;}
+  .promo-step .n{
+    width:27px;height:27px;border-radius:9px;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--ff-mono);font-size:12px;font-weight:600;
+    color:var(--promo-gold);
+    background:var(--promo-gold-soft);border:1px solid var(--promo-gold-line);
+  }
+  .promo-step .txt b{display:block;font-size:14.5px;font-weight:600;color:#fff;margin-bottom:2px;}
+  .promo-step .txt span{font-size:13.5px;line-height:1.55;color:#B7C6CE;}
+  .promo-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
+  .promo-actions .btn-download{background:var(--promo-gold);color:#3A2A00;box-shadow:0 14px 28px -14px rgba(247,183,51,0.7);}
+  .promo-actions .btn-download:hover{background:#FFC95E;}
+  .promo-actions .btn-ghost{color:#fff;border-color:rgba(247,183,51,0.5);}
+  .promo-actions .btn-ghost:hover{background:var(--promo-gold);color:#3A2A00;border-color:var(--promo-gold);}
+  .promo-note{font-family:var(--ff-mono);font-size:11.5px;color:#8FA3AD;margin-top:16px;}
+  .promo-note a{color:var(--promo-gold);text-decoration:none;border-bottom:1px dotted rgba(247,183,51,0.5);}
+
+  .promo-timer{
+    background:rgba(247,183,51,0.05);
+    border:1px solid var(--promo-gold-line);
+    border-radius:22px;
+    padding:26px 24px 24px;
+    text-align:center;
+  }
+  .promo-timer-label{
+    font-family:var(--ff-mono);font-size:11.5px;font-weight:600;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--promo-gold);
+    margin-bottom:18px;
+  }
+  .promo-clock{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+  .promo-unit{
+    background:rgba(8,28,46,0.72);
+    border:1px solid rgba(247,183,51,0.22);
+    border-radius:14px;padding:15px 6px 12px;
+  }
+  .promo-unit .v{
+    display:block;font-family:var(--ff-mono);font-weight:600;
+    font-size:clamp(34px,4.8vw,52px);line-height:1;
+    color:var(--promo-gold);font-variant-numeric:tabular-nums;
+    text-shadow:0 0 26px rgba(247,183,51,0.45);
+  }
+  .promo-unit .l{
+    display:block;margin-top:8px;font-family:var(--ff-mono);
+    font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#C9A96A;
+  }
+  .promo-timer-foot{margin-top:18px;font-size:13px;line-height:1.6;color:#B7C6CE;}
+  .promo-timer-foot strong{color:var(--promo-gold);font-weight:600;}
+
   /* ---------- TRUST ---------- */
   .trust{
     background:var(--navy-900);border-radius:28px;
@@ -374,6 +472,7 @@
     .hero-grid{grid-template-columns:1fr;}
     .phone-stage{order:-1;margin-bottom:12px;}
     .parser-card{grid-template-columns:1fr;}
+    .promo-card{grid-template-columns:1fr;padding:36px 28px;gap:34px;}
     .feature-grid{grid-template-columns:repeat(2,1fr);}
     .provider-grid{grid-template-columns:1fr;}
     .trust{grid-template-columns:1fr;padding:36px 28px;}
@@ -384,6 +483,10 @@
     .feature-grid{grid-template-columns:1fr;}
     .wrap{padding:0 20px;}
     .parser-card{padding:28px 22px;}
+    .promo-card{padding:30px 20px;gap:28px;}
+    .promo-clock{gap:7px;}
+    .promo-unit{padding:11px 4px 9px;}
+    .promo-unit .v{font-size:clamp(26px,8vw,34px);}
   }
 </style>
 </head>
@@ -393,6 +496,7 @@
   <nav class="nav">
     <a href="#top" class="brand"><span class="dot"></span>UtilEs</a>
     <ul class="nav-links">
+      <li data-promo-link hidden><a href="#promo">Promo</a></li>
       <li><a href="#como-funciona">Cómo funciona</a></li>
       <li><a href="#proveedores">Proveedores</a></li>
       <li><a href="#confianza">Seguridad</a></li>
@@ -434,6 +538,51 @@
           </div>
         </div>
         <div class="float-badge badge-bottom"><span class="ind"></span>+50 MB de bono</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROMO -->
+  <section class="promo-section wrap" id="promo" hidden>
+    <div class="promo-card">
+      <div class="promo-copy">
+        <div class="promo-tag" id="promo-tag"><span class="ind"></span><span id="promo-tag-text">PRÓXIMAMENTE</span></div>
+        <h2>Invita, suma registros y <em>gana una licencia gratis</em>.</h2>
+        <p class="promo-lead">Este fin de semana, el usuario que consiga <strong>más registros con su código de invitación</strong> se lleva una licencia UtilEs sin costo.</p>
+        <ol class="promo-steps">
+          <li class="promo-step">
+            <span class="n">1</span>
+            <div class="txt"><b>Descarga UtilEs</b><span>Abre tu perfil y copia tu código de invitación.</span></div>
+          </li>
+          <li class="promo-step">
+            <span class="n">2</span>
+            <div class="txt"><b>Comparte tu código</b><span>Cada persona que se registre con él suma para ti.</span></div>
+          </li>
+          <li class="promo-step">
+            <span class="n">3</span>
+            <div class="txt"><b>Gana la licencia</b><span>Al cerrar el domingo contamos los registros y anunciamos al ganador.</span></div>
+          </li>
+        </ol>
+        <div class="promo-actions">
+          <a href="assets/UtilEs.apk" download class="btn btn-download">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>
+            Descarga manual (.apk)
+          </a>
+          <a href="https://t.me/UtilESCuba" target="_blank" rel="noopener" class="btn btn-ghost">Seguir en Telegram</a>
+        </div>
+        <p class="promo-note">El ganador se anuncia en <a href="https://t.me/UtilESCuba" target="_blank" rel="noopener">@UtilESCuba</a> · promoción en hora de Cuba.</p>
+      </div>
+      <div class="promo-side">
+        <div class="promo-timer">
+          <div class="promo-timer-label" id="promo-timer-label">La promo empieza en</div>
+          <div class="promo-clock" role="timer" aria-label="Cuenta atrás de la promoción">
+            <div class="promo-unit"><span class="v" data-promo-d>00</span><span class="l">Días</span></div>
+            <div class="promo-unit"><span class="v" data-promo-h>00</span><span class="l">Horas</span></div>
+            <div class="promo-unit"><span class="v" data-promo-m>00</span><span class="l">Min</span></div>
+            <div class="promo-unit"><span class="v" data-promo-s>00</span><span class="l">Seg</span></div>
+          </div>
+          <div class="promo-timer-foot">Desde el <strong>sábado 19</strong> hasta el <strong>domingo 20 de septiembre, 23:59</strong>.</div>
+        </div>
       </div>
     </div>
   </section>
@@ -613,6 +762,79 @@
       }
     })
     .catch(function(){ /* keep hardcoded fallback */ });
+})();
+
+/* ---------- PROMO ---------- */
+(function(){
+  /* Para activar/desactivar la promo cambia "enabled" y las fechas.
+     Fechas en hora de Cuba (UTC-04:00). Al terminar, la sección se oculta sola. */
+  var PROMO = {
+    enabled: true,
+    start: '2026-09-19T00:00:00-04:00',
+    end:   '2026-09-20T23:59:59-04:00'
+  };
+
+  var section = document.getElementById('promo');
+  if (!section) return;
+
+  var links = document.querySelectorAll('[data-promo-link]');
+
+  function toggle(show){
+    section.hidden = !show;
+    links.forEach(function(l){ l.hidden = !show; });
+  }
+
+  var start = new Date(PROMO.start).getTime();
+  var end = new Date(PROMO.end).getTime();
+
+  if (!PROMO.enabled || isNaN(start) || isNaN(end) || Date.now() > end){
+    toggle(false);
+    return;
+  }
+
+  toggle(true);
+
+  var label = document.getElementById('promo-timer-label');
+  var tag = document.getElementById('promo-tag');
+  var tagText = document.getElementById('promo-tag-text');
+  var out = {
+    d: section.querySelector('[data-promo-d]'),
+    h: section.querySelector('[data-promo-h]'),
+    m: section.querySelector('[data-promo-m]'),
+    s: section.querySelector('[data-promo-s]')
+  };
+  var mode = '';
+  var timer = null;
+
+  function pad(n){ return (n < 10 ? '0' : '') + n; }
+
+  function tick(){
+    var now = Date.now();
+
+    if (now > end){
+      clearInterval(timer);
+      toggle(false);
+      return;
+    }
+
+    var live = now >= start;
+    var next = live ? 'live' : 'soon';
+    if (next !== mode){
+      mode = next;
+      label.textContent = live ? 'La promo termina en' : 'La promo empieza en';
+      tagText.textContent = live ? 'EN CURSO' : 'PRÓXIMAMENTE';
+      tag.classList.toggle('live', live);
+    }
+
+    var diff = Math.floor(((live ? end : start) - now) / 1000);
+    out.d.textContent = pad(Math.floor(diff / 86400));
+    out.h.textContent = pad(Math.floor(diff % 86400 / 3600));
+    out.m.textContent = pad(Math.floor(diff % 3600 / 60));
+    out.s.textContent = pad(diff % 60);
+  }
+
+  tick();
+  timer = setInterval(tick, 1000);
 })();
 
 (function(){

@@ -51,6 +51,13 @@ cp /ruta/a/tu/app-direct-release.apk utiles-landing/assets/UtilEs.apk
 
 Actualiza también la versión, el tamaño y el requisito de Android en los dos bloques `.btn-meta` de `index.html` (busca `v1.2.7 · 8.4 MB`) cada vez que subas una nueva build. Si prefieres no alojar el binario en el repo (GitHub limita archivos a 100 MB y recomienda evitar binarios grandes en Pages), sube el APK como asset de un [GitHub Release](https://docs.github.com/en/repositories/releasing-projects-on-github) y cambia el `href` de ambos botones a esa URL — el resto del sitio sigue igual.
 
+## Promoción (activar / desactivar)
+
+La sección `#promo` se controla desde `index.html`, en el bloque `/* ---------- PROMO ---------- */` del `<script>`:
+
+- `enabled: true | false` — muestra u oculta la sección y el enlace "Promo" del menú.
+- `start` y `end` — fechas en hora de Cuba (UTC-04:00). Antes de `start` el reloj grande cuenta para el inicio ("PRÓXIMAMENTE"); dentro del rango cuenta para el cierre ("EN CURSO"); al pasar `end` se oculta sola.
+
 ## Editar contenido
 
 Todo vive en `index.html`:
