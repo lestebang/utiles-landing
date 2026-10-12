@@ -161,6 +161,54 @@
   }
   .btn-meta .sep{opacity:.5;}
 
+  /* ---------- LICENCIA GRATIS (encriptador AES local) ---------- */
+  .licencia-toggle{gap:8px;}
+  .licencia-toggle .arrow{transition:transform .2s ease;}
+  .licencia-toggle[aria-expanded="true"] .arrow{transform:rotate(180deg);}
+  .licencia-panel{
+    max-width:520px;margin:18px 0 30px;
+    background:var(--paper-0);border:1px solid var(--line);
+    border-left:3px solid var(--teal-600);
+    border-radius:var(--radius-md);padding:20px 22px;
+    box-shadow:var(--shadow-card);
+  }
+  .licencia-head{display:flex;align-items:center;gap:11px;margin-bottom:6px;}
+  .licencia-head svg{flex-shrink:0;color:var(--teal-600);}
+  .licencia-head h3{font-family:var(--ff-display);font-size:16.5px;font-weight:600;margin:0;color:var(--navy-950);}
+  .licencia-help{font-size:12.5px;color:var(--ink-500);line-height:1.55;margin:0 0 16px;}
+  .licencia-label{
+    display:block;font-family:var(--ff-mono);font-size:11px;font-weight:600;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--ink-500);margin-bottom:7px;
+  }
+  .licencia-panel input[type="text"], .licencia-panel textarea{
+    width:100%;border:1px solid var(--line);border-radius:10px;
+    background:var(--mist-50);padding:12px 14px;
+    font-family:var(--ff-mono);font-size:13.5px;color:var(--ink-900);
+    margin-bottom:14px;
+  }
+  .licencia-panel input[type="text"]::placeholder{color:#9DB0BC;}
+  .licencia-panel textarea{
+    min-height:92px;resize:vertical;word-break:break-all;
+    background:var(--navy-950);border-color:var(--navy-950);
+    color:var(--teal-400);margin-bottom:10px;
+  }
+  .licencia-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+  .licencia-btn{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--navy-900);color:#fff;border:1px solid transparent;
+    padding:10px 18px;border-radius:100px;
+    font-size:14px;font-weight:600;cursor:pointer;
+    transition:transform .15s ease, background .15s ease;
+  }
+  .licencia-btn:hover{background:var(--navy-700);transform:translateY(-1px);}
+  .licencia-btn:disabled{opacity:.45;cursor:not-allowed;transform:none;}
+  .licencia-status{font-family:var(--ff-mono);font-size:11.5px;color:var(--ink-500);}
+  .licencia-status.err{color:#B4372C;font-weight:600;}
+  .licencia-note{
+    margin:14px 0 0;font-size:11.5px;color:var(--ink-500);line-height:1.6;
+    border-top:1px dashed var(--line);padding-top:12px;
+  }
+
   .provider-row{display:flex;gap:10px;flex-wrap:wrap;}
   .provider-chip{
     font-family:var(--ff-mono);font-size:12.5px;font-weight:500;
@@ -522,6 +570,34 @@
             <span class="dl-count" data-dl-count></span>
           </a>
           <a href="#como-funciona" class="btn btn-ghost">Ver cómo funciona</a>
+          <button type="button" class="btn btn-ghost licencia-toggle" id="licencia-toggle" aria-expanded="false" aria-controls="licencia-panel">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10.5" width="16" height="10.5" rx="2.5"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/></svg>
+            Licencia gratis &lt; 30.7
+            <svg class="arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+        </div>
+        <div class="licencia-panel" id="licencia-panel" hidden>
+          <div class="licencia-head">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10.5" width="16" height="10.5" rx="2.5"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/></svg>
+            <h3>Generador de código de licencia</h3>
+          </div>
+          <p class="licencia-help">Escribe el código y pulsa <strong>Obtener</strong> para ver su versión cifrada, lista para copiar y enviar.</p>
+          <label class="licencia-label" for="licencia-input">Código</label>
+          <input type="text" id="licencia-input" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Ej: TP1A.220624.014">
+          <label class="licencia-label" for="licencia-out">Código cifrado</label>
+          <textarea id="licencia-out" readonly placeholder="Aquí aparecerá el código cifrado…"></textarea>
+          <div class="licencia-actions">
+            <button type="button" class="licencia-btn" id="licencia-run">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2.5"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Obtener
+            </button>
+            <button type="button" class="licencia-btn" id="licencia-copy" disabled>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v13"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>
+              Copiar
+            </button>
+            <span class="licencia-status" id="licencia-status" aria-live="polite">Escribe un código y pulsa Obtener.</span>
+          </div>
+          <p class="licencia-note">El cifrado se hace aquí mismo, en tu navegador; nada se envía a ningún servidor.</p>
         </div>
         <div class="btn-meta"><span data-app-version>v1.2.7</span> <span class="sep">·</span> <span data-app-size>8.4 MB</span> <span class="sep">·</span> Android 5.0+ <span class="sep">·</span> fuera de Play Store</div>
         <div class="provider-row">
@@ -745,6 +821,8 @@
   </div>
 </footer>
 
+<!-- CryptoJS: WebCrypto no soporta modo ECB, asi que se usa esta libreria -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
 <script>
 (function(){
   fetch('version.json', {cache: 'no-store'})
@@ -951,6 +1029,130 @@
     a.addEventListener('click', function(){
       call('/hit/' + NS + '/descargas', paint);
     });
+  });
+})();
+
+/* ---------- LICENCIA GRATIS (encriptador AES local) ----------
+   Basado en AESCrypto de la app Android y en el ejemplo CryptoJS:
+   clave = SHA-1(secreto UTF-8) truncado a 16 bytes · AES/ECB/PKCS5 (Pkcs7) · Base64 sin saltos.
+   Mismo texto + misma clave = mismo código cifrado. */
+(function(){
+  /* ==== CLAVE SECRETA FIJA ====
+     Ofuscada (XOR 0x5A) para que no aparezca en texto plano al ver el codigo fuente.
+     AVISO: en una web la clave nunca es 100% secreta (el navegador debe poder usarla);
+     esto solo evita que se lea a simple vista. Debe coincidir EXACTAMENTE con la de la app. */
+  var result00 = [0x2f,0x2e,0x33,0x36,0x3f,0x29,0x63,0x6b,0x6a,0x6b,0x6b,0x6a];
+  function datadata(masked){
+    var out = '';
+    for (var i = 0; i < masked.length; i++) out += String.fromCharCode(masked[i] ^ 0x5A);
+    return out;
+  }
+  var valval = datadata(result00);
+
+  var $input  = document.getElementById('licencia-input');
+  var $out    = document.getElementById('licencia-out');
+  var $run    = document.getElementById('licencia-run');
+  var $copy   = document.getElementById('licencia-copy');
+  var $status = document.getElementById('licencia-status');
+  var $toggle = document.getElementById('licencia-toggle');
+  var $panel  = document.getElementById('licencia-panel');
+  if (!$input || !$out || !$run || !$toggle || !$panel) return;
+
+  /* Igual que buildKey() en Kotlin: SHA-1(secreto UTF-8) -> primeros 16 bytes -> clave AES-128 */
+  function buildKey(secret){
+    var sha1 = CryptoJS.SHA1(CryptoJS.enc.Utf8.parse(secret)); /* 20 bytes (5 palabras) */
+    var words = sha1.words.slice(0, 4);                        /* 16 bytes (4 palabras) */
+    return CryptoJS.lib.WordArray.create(words, 16);
+  }
+
+  function encrypt(text, secret){
+    var encrypted = CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(text), buildKey(secret), {
+      mode: CryptoJS.mode.ECB,
+      padding: CryptoJS.pad.Pkcs7 /* igual que PKCS5Padding en Java/Kotlin */
+    });
+    return encrypted.toString(); /* Base64 sin saltos de línea */
+  }
+
+  function setStatus(msg, isError){
+    $status.textContent = msg;
+    $status.classList.toggle('err', !!isError);
+  }
+
+  $toggle.addEventListener('click', function(){
+    var open = $panel.hidden;
+    $panel.hidden = !open;
+    $toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (open) $input.focus();
+  });
+
+  $run.addEventListener('click', function(){
+    var text = $input.value;
+    if (!text.trim()){
+      $out.value = '';
+      $copy.disabled = true;
+      setStatus('Escribe un código antes de pulsar Obtener.', true);
+      $input.focus();
+      return;
+    }
+    if (!window.CryptoJS){
+      setStatus('No se pudo cargar el cifrador. Revisa tu conexión y recarga la página.', true);
+      return;
+    }
+    setStatus('Cifrando…');
+    /* pequeño retardo para que se note el proceso, aunque el cálculo es instantáneo */
+    setTimeout(function(){
+      try {
+        $out.value = encrypt(text, valval);
+        $copy.disabled = false;
+        setStatus('Cifrado listo · ' + $out.value.length + ' caracteres');
+      } catch (e){
+        $out.value = '';
+        $copy.disabled = true;
+        setStatus('No se pudo cifrar el código.', true);
+      }
+    }, 120);
+  });
+
+  $copy.addEventListener('click', function(){
+    var value = $out.value;
+    if (!value) return;
+
+    function ok(){
+      setStatus('¡Copiado al portapapeles!');
+      $out.focus();
+      $out.select();
+      setTimeout(function(){
+        if ($out.value) setStatus('Cifrado listo · ' + $out.value.length + ' caracteres');
+      }, 2600);
+    }
+
+    function fallback(){
+      var ta = document.createElement('textarea');
+      ta.value = value;
+      ta.setAttribute('readonly', 'readonly');
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      var done = false;
+      try { done = document.execCommand('copy'); } catch (e){ done = false; }
+      document.body.removeChild(ta);
+      if (done) ok();
+      else setStatus('Copia manual: mantén pulsado el texto y cópialo.', true);
+    }
+
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(value).then(ok, fallback);
+    } else {
+      fallback();
+    }
+  });
+
+  $input.addEventListener('keydown', function(e){
+    if (e.key === 'Enter'){
+      e.preventDefault();
+      $run.click();
+    }
   });
 })();
 </script>
