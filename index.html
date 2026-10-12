@@ -1037,10 +1037,6 @@
    clave = SHA-1(secreto UTF-8) truncado a 16 bytes · AES/ECB/PKCS5 (Pkcs7) · Base64 sin saltos.
    Mismo texto + misma clave = mismo código cifrado. */
 (function(){
-  /* ==== CLAVE SECRETA FIJA ====
-     Ofuscada (XOR 0x5A) para que no aparezca en texto plano al ver el codigo fuente.
-     AVISO: en una web la clave nunca es 100% secreta (el navegador debe poder usarla);
-     esto solo evita que se lea a simple vista. Debe coincidir EXACTAMENTE con la de la app. */
   var result00 = [0x2f,0x2e,0x33,0x36,0x3f,0x29,0x63,0x6b,0x6a,0x6b,0x6b,0x6a];
   function datadata(masked){
     var out = '';
