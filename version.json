@@ -1,4 +1,9 @@
 {
   "version": "1.7.9",
-  "size": "22.6 MB"
+  "size": "22.6 MB",
+  "changelog": [
+    "Adicionado aviso en el calendario de fechas del Portal de ETECSA",
+    "Errores solucionados",
+    "Optimizaciones"
+  ]
 }
