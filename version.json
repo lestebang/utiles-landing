@@ -1,9 +1,12 @@
 {
-  "version": "1.7.9",
+  "version": "2.1.1",
   "size": "22.6 MB",
   "changelog": [
-    "Adicionado aviso en el calendario de fechas del Portal de ETECSA",
-    "Errores solucionados",
-    "Optimizaciones"
+    "Adicionado portal local de UtilEs",
+    "Adicionado VPN para acceso al servidor web de UtilEs",
+    "Modificado VPN Automático",
+    "Adicionado ícono en la barra de estado para VPN",
+    "Adicionado código de teléfonos en Información Útil",
+    "Errores solucionados"
   ]
 }
