@@ -1,12 +1,10 @@
 {
-  "version": "2.1.1",
-  "size": "22.6 MB",
+  "version": "2.2.1",
+  "size": "23.1 MB",
   "changelog": [
-    "Adicionado portal local de UtilEs",
-    "Adicionado VPN para acceso al servidor web de UtilEs",
-    "Modificado VPN Automático",
-    "Adicionado ícono en la barra de estado para VPN",
-    "Adicionado código de teléfonos en Información Útil",
+    "- Adicionado Internet en el VPN mediante pago",
+    "Adicionado prueba de velocidad compartida",
+    "Adicionado modo avanzado en GSM",
     "Errores solucionados"
   ]
 }
