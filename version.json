@@ -1,10 +1,10 @@
 {
-  "version": "2.2.1",
-  "size": "23.1 MB",
+  "version": "2.2.4",
+  "size": "23.2 MB",
   "changelog": [
-    "- Adicionado Internet en el VPN mediante pago",
-    "Adicionado prueba de velocidad compartida",
-    "Adicionado modo avanzado en GSM",
+    "Adicionado Firewall",
+    "Adicionado limpieza del correo Nauta",
+    "Adicionado notificación de acceso o no a Internet",
     "Errores solucionados"
   ]
 }
