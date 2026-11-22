@@ -1,10 +1,9 @@
 {
-  "version": "2.2.4",
-  "size": "23.2 MB",
+  "version": "2.3.5",
+  "size": "23.4 MB",
   "changelog": [
-    "Adicionado Firewall",
-    "Adicionado limpieza del correo Nauta",
-    "Adicionado notificación de acceso o no a Internet",
-    "Errores solucionados"
+    "Adicionado captura de la notificación del portal cautivo",
+    "Adicionado sistema de proteccion y/o antirobo del telefono",
+    "AAdicionado sistema de recompensas o puntos en UtilEs"
   ]
 }
