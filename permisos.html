@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Permisos — UtilEs</title>
+<meta name="description" content="Qué permisos pide UtilEs, para qué los usa y por qué algunos antivirus dan falsos positivos.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--navy-950:#081C2E;--navy-900:#0B2942;--navy-700:#123B5E;--teal-600:#1F7A76;--teal-400:#4FB3A9;--mist-50:#F2F6F5;--ink-900:#10202B;--ink-500:#52697A;--line:#DDE6E4;}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--ink-900);background:var(--mist-50);line-height:1.65}
+a{color:var(--teal-600)}
+header{background:var(--navy-900);color:#fff;padding:20px 0 64px}
+.wrap{max-width:980px;margin:0 auto;padding:0 22px}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:48px}
+.brand{font-family:'Space Grotesk';font-weight:700;font-size:20px;color:#fff;text-decoration:none;display:flex;align-items:center;gap:8px}
+.brand::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--teal-400)}
+.back{color:#A9C3CF;text-decoration:none;font-size:14px}.back:hover{color:#fff}
+.eyebrow{font-family:'JetBrains Mono';font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-400)}
+header h1{font-family:'Space Grotesk';font-size:clamp(34px,5vw,52px);margin:10px 0 0;line-height:1.1}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.toc a{color:#DCEBEF;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);padding:6px 12px;border-radius:99px;font-size:13px;text-decoration:none}
+.toc a:hover{background:var(--teal-600)}
+main{margin-top:-36px}
+.card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:clamp(22px,4vw,44px);box-shadow:0 18px 40px -22px rgba(8,28,46,.35)}
+main h1{display:none}
+h2{font-family:'Space Grotesk';font-size:26px;margin:48px 0 16px;padding-top:12px;scroll-margin-top:16px}
+h3{font-family:'Space Grotesk';font-size:19px;margin:28px 0 10px}
+hr{border:0;border-top:1px solid var(--line);margin:40px 0}
+ul{padding-left:20px}li{margin:6px 0}
+code{font-family:'JetBrains Mono',monospace;font-size:12.5px;background:var(--mist-50);color:var(--navy-700);padding:2px 6px;border-radius:6px;white-space:nowrap}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:14px;margin:12px 0}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th{background:var(--navy-900);color:#fff;text-align:left;font-weight:600;padding:12px 14px;font-size:13px}
+td{padding:12px 14px;border-top:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:#FAFCFC}
+td:first-child{min-width:180px}td code{white-space:normal;word-break:break-word}
+.badge{display:inline-block;white-space:nowrap;font-size:12px;font-weight:600;padding:3px 10px;border-radius:99px}
+.badge.red{background:#FDECEC;color:#B42318}.badge.orange{background:#FFF1E0;color:#B54708}.badge.green{background:#E6F4EC;color:#2F6F4F}
+footer{text-align:center;color:var(--ink-500);font-size:13px;padding:40px 0}
+</style></head><body>
+<header><div class="wrap">
+<div class="top"><a class="brand" href="./">UtilEs</a><a class="back" href="./">← Volver al inicio</a></div>
+<div class="eyebrow">Privacidad y transparencia</div><h1>Permisos de UtilEs</h1>
+<nav class="toc"><a href="#llamadas-y-cdigos-ussd">📞 Llamadas y códigos USSD</a><a href="#contactos">👥 Contactos</a><a href="#sms">✉️ SMS</a><a href="#ubicacin">📍 Ubicación</a><a href="#internet-y-redes">📶 Internet y redes</a><a href="#seguridad-antirrobo">🛡️ Seguridad antirrobo</a><a href="#notificaciones-y-avisos">🔔 Notificaciones y avisos</a><a href="#ventanas-flotantes-y-accesos-rpidos">🪟 Ventanas flotantes y accesos rápidos</a><a href="#funcionamiento-en-segundo-plano">⚙️ Funcionamiento en segundo plano</a><a href="#calendario">📅 Calendario</a><a href="#por-qu-algunos-antivirus-marcan-utiles-como-virus-o-riesgo">🦠 ¿Por qué algunos antivirus marcan UtilEs como "virus" o "riesgo"?</a><a href="#preguntas-frecuentes">Preguntas frecuentes</a></nav>
+</div></header>
+<main class="wrap"><article class="card"><h1>Permisos de UtilEs</h1>
+<p>Este documento explica, en palabras sencillas, <strong>cada permiso que pide UtilEs y para qué lo usa</strong>.</p>
+<p>Algunas ideas importantes antes de empezar:</p>
+<ul>
+<li><strong>La mayoría de permisos son opcionales.</strong> Si no los concedes, la app sigue funcionando; solo deja de funcionar la opción que los necesita.</li>
+<li><strong>Puedes quitarlos cuando quieras</strong> en <em>Ajustes del teléfono → Aplicaciones → UtilEs → Permisos</em>.</li>
+<li><strong>Tus datos se quedan en tu teléfono.</strong> Contactos, SMS, llamadas y ubicación se leen solo en el teléfono para mostrarte la información. Solo se envía algo por Internet cuando tú usas una función que lo necesita (por ejemplo, el panel web de seguridad o un reporte que tú mandas).</li>
+</ul>
+<p>Leyenda:</p>
+<ul>
+<li>🔴 <strong>Peligroso</strong>: Android te pregunta antes de concederlo.</li>
+<li>🟠 <strong>Especial</strong>: lo activas tú a mano en una pantalla de Ajustes de Android.</li>
+<li>🟢 <strong>Normal</strong>: Android lo concede solo al instalar; no da acceso a datos personales.</li>
+</ul>
+<hr />
+<h2 id="llamadas-y-cdigos-ussd">📞 Llamadas y códigos USSD</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Permiso</th>
+<th>Tipo</th>
+<th>Para qué lo usa UtilEs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CALL_PHONE</code></td>
+<td><span class="badge red">🔴 Peligroso</span></td>
+<td>Marcar los códigos USSD (<code>*222#</code>, <code>*234#</code>, <code>*99</code>, transferencias, planes) directamente al tocar un botón, sin abrir el marcador.</td>
+</tr>
+<tr>
+<td><code>READ_PHONE_STATE</code></td>
+<td><span class="badge red">🔴 Peligroso</span></td>
+<td>Saber qué SIM usar en teléfonos con dos SIM, detectar cuándo termina una llamada (para actualizar el saldo solo) y detectar si cambiaron la SIM (Seguridad antirrobo).</td>
+</tr>
+<tr>
+<td><code>READ_PHONE_NUMBERS</code></td>
+<td><span class="badge red">🔴 Peligroso</span></td>
+<td>Mostrar tu propio número en el panel web y en la función de seguridad.</td>
+</tr>
+<tr>
+<td><code>READ_CALL_LOG</code></td>
+<td><span class="badge red">🔴 Peligroso</span></td>
+<td>Mostrar el <strong>Registro</strong> de llamadas con nombres, el historial de <code>*99</code> y actualizar el saldo después de una llamada.</td>
+</tr>
+<tr>
+<td><code>PROCESS_OUTGOING_CALLS</code></td>
+<td><span class="badge red">🔴 Peligroso</span></td>
+<td>Detectar que hiciste una llamada para actualizar el saldo automáticamente al terminar.</td>
+</tr>
+<tr>
+<td><code>ANSWER_PHONE_CALLS</code></td>
+<td><span class="badge red">🔴 Peligroso</span></td>
+<td><strong>Bloqueo de llamadas</strong> (anónimas, revertidas, fijos, desconocidas) en teléfonos donde no está disponible el bloqueo oficial de Android.</td>
+</tr>
+<tr>
+<td><code>BIND_SCREENING_SERVICE</code></td>
+<td><span class="badge orange">🟠 Especial</span></td>
+<td>Bloqueo de llamadas oficial de Android 10+. Lo activas al elegir UtilEs como app de <em>identificación y spam</em>.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="contactos">👥 Contactos</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Permiso</th>
+<th>Tipo</th>
+<th>Para qué lo usa UtilEs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>READ_CONTACTS</code></td>
+<td><span class="badge red">🔴 Peligroso</span></td>
+<td>Mostrar el nombre del contacto en vez del número (historial <code>*99</code>, Registro) y autocompletar el número en <strong>Transferencias</strong>. Si no lo das, solo verás números.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="sms">✉️ SMS</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Permiso</th>
+<th>Tipo</th>
+<th>Para qué lo usa UtilEs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>READ_SMS</code></td>
+<td><span class="badge red">🔴 Peligroso</span></td>
+<td>Mostrar los SMS en el <strong>Registro</strong> de cada contacto y en el panel web, y actualizar el saldo después de enviar un SMS.</td>
+</tr>
+<tr>
+<td><code>SEND_SMS</code></td>
+<td><span class="badge red">🔴 Peligroso</span></td>
+<td>Enviar SMS de servicios de ETECSA y, en <strong>Seguridad</strong>, mandar alertas a tu número de confianza (por ejemplo, si cambian la SIM) <strong>sin necesitar Internet</strong>.</td>
+</tr>
+<tr>
+<td><code>RECEIVE_SMS</code></td>
+<td><span class="badge red">🔴 Peligroso</span></td>
+<td><strong>Seguridad antirrobo</strong>: recibir comandos por SMS desde tu número de confianza (hacer sonar la alarma, pedir la ubicación, bloquear). Solo se aceptan comandos con tu clave.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="ubicacin">📍 Ubicación</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Permiso</th>
+<th>Tipo</th>
+<th>Para qué lo usa UtilEs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ACCESS_COARSE_LOCATION</code> / <code>ACCESS_FINE_LOCATION</code></td>
+<td><span class="badge red">🔴 Peligroso</span></td>
+<td>Ver el nombre de la red Wi‑Fi (Android lo exige), los <strong>Puntos de conexión</strong> cercanos, la información de la red móvil (celda/antena) y localizar el teléfono en <strong>Seguridad</strong>.</td>
+</tr>
+<tr>
+<td><code>ACCESS_BACKGROUND_LOCATION</code></td>
+<td><span class="badge red">🔴 Peligroso</span></td>
+<td>Solo para <strong>Seguridad antirrobo</strong>: poder enviar la ubicación del teléfono perdido aunque la app esté cerrada.</td>
+</tr>
+<tr>
+<td><code>FOREGROUND_SERVICE_LOCATION</code></td>
+<td><span class="badge green">🟢 Normal</span></td>
+<td>Permite usar la ubicación mientras la protección o el panel web están activos (con notificación visible).</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="internet-y-redes">📶 Internet y redes</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Permiso</th>
+<th>Tipo</th>
+<th>Para qué lo usa UtilEs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>INTERNET</code></td>
+<td><span class="badge green">🟢 Normal</span></td>
+<td>Iniciar sesión en <strong>Nauta Wifi</strong>, test de velocidad, foro, perfil, VPN, comprobar actualizaciones y enviar reportes/opiniones.</td>
+</tr>
+<tr>
+<td><code>ACCESS_NETWORK_STATE</code></td>
+<td><span class="badge green">🟢 Normal</span></td>
+<td>Saber si tienes conexión (datos o Wi‑Fi) y mostrar el estado de Internet.</td>
+</tr>
+<tr>
+<td><code>ACCESS_WIFI_STATE</code></td>
+<td><span class="badge green">🟢 Normal</span></td>
+<td>Saber si estás en una Wi‑Fi de ETECSA para el inicio de sesión Nauta y mostrar datos de la Wi‑Fi.</td>
+</tr>
+<tr>
+<td><code>BIND_VPN_SERVICE</code></td>
+<td><span class="badge orange">🟠 Especial</span></td>
+<td><strong>VPN</strong> de UtilEs y <strong>Cortafuegos</strong> por app (bloquea Internet a las apps que elijas). Android te pide confirmación la primera vez.</td>
+</tr>
+<tr>
+<td><code>QUERY_ALL_PACKAGES</code></td>
+<td><span class="badge green">🟢 Normal</span></td>
+<td>El <strong>Cortafuegos</strong> necesita ver la lista de apps instaladas para que elijas cuáles bloquear.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="seguridad-antirrobo">🛡️ Seguridad antirrobo</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Permiso</th>
+<th>Tipo</th>
+<th>Para qué lo usa UtilEs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>BIND_DEVICE_ADMIN</code> (administrador del dispositivo)</td>
+<td><span class="badge orange">🟠 Especial</span></td>
+<td>Bloquear la pantalla a distancia y evitar que desinstalen la app fácilmente si te roban el teléfono. Lo activas tú en Seguridad.</td>
+</tr>
+<tr>
+<td><code>BLUETOOTH_CONNECT</code> / <code>BLUETOOTH_SCAN</code> / <code>BLUETOOTH_ADVERTISE</code> (y <code>BLUETOOTH</code>, <code>BLUETOOTH_ADMIN</code> en Android 11 o menos)</td>
+<td><span class="badge red">🔴 Peligroso</span></td>
+<td><strong>Correa Bluetooth</strong>: suena una alarma si el teléfono se aleja de tu reloj, audífonos u otro dispositivo vinculado.</td>
+</tr>
+<tr>
+<td><code>USE_FULL_SCREEN_INTENT</code></td>
+<td><span class="badge orange">🟠 Especial</span></td>
+<td>Mostrar la pantalla de "teléfono perdido" y la alarma encima de la pantalla de bloqueo.</td>
+</tr>
+<tr>
+<td><code>VIBRATE</code></td>
+<td><span class="badge green">🟢 Normal</span></td>
+<td>Vibrar con las alarmas y avisos.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="notificaciones-y-avisos">🔔 Notificaciones y avisos</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Permiso</th>
+<th>Tipo</th>
+<th>Para qué lo usa UtilEs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST_NOTIFICATIONS</code></td>
+<td><span class="badge red">🔴 Peligroso</span></td>
+<td>Mostrar notificaciones: saldo, vencimiento de planes, velocidad, avisos de actualización, mensajes del foro y alertas de seguridad.</td>
+</tr>
+<tr>
+<td><code>BIND_NOTIFICATION_LISTENER_SERVICE</code></td>
+<td><span class="badge orange">🟠 Especial</span></td>
+<td><strong>Historial de notificaciones</strong>: guardar las notificaciones que llegan para que puedas verlas después. Solo si lo activas en esa pantalla.</td>
+</tr>
+<tr>
+<td><code>ACCESS_NOTIFICATION_POLICY</code></td>
+<td><span class="badge orange">🟠 Especial</span></td>
+<td>Desde el panel web de seguridad: poner el teléfono en silencio o quitar el silencio para que suene la alarma.</td>
+</tr>
+<tr>
+<td><code>USE_FULL_SCREEN_INTENT</code></td>
+<td><span class="badge orange">🟠 Especial</span></td>
+<td>Aviso de <strong>llamada entrante</strong> grande sobre la pantalla de bloqueo.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="ventanas-flotantes-y-accesos-rpidos">🪟 Ventanas flotantes y accesos rápidos</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Permiso</th>
+<th>Tipo</th>
+<th>Para qué lo usa UtilEs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SYSTEM_ALERT_WINDOW</code> (mostrar sobre otras apps)</td>
+<td><span class="badge orange">🟠 Especial</span></td>
+<td><strong>Medidor de velocidad flotante</strong> y la burbuja de tiempo de <strong>Nauta</strong> encima de otras apps.</td>
+</tr>
+<tr>
+<td><code>BIND_QUICK_SETTINGS_TILE</code></td>
+<td><span class="badge green">🟢 Normal</span></td>
+<td>Botones en el panel de ajustes rápidos (deslizar hacia abajo) para <strong>Nauta</strong> y <strong>VPN</strong>.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="funcionamiento-en-segundo-plano">⚙️ Funcionamiento en segundo plano</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Permiso</th>
+<th>Tipo</th>
+<th>Para qué lo usa UtilEs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>FOREGROUND_SERVICE</code> y sus tipos (<code>SPECIAL_USE</code>, <code>DATA_SYNC</code>, <code>LOCATION</code>)</td>
+<td><span class="badge green">🟢 Normal</span></td>
+<td>Mantener activas funciones que tú encendiste (velocidad, saldo en notificación, actualización automática de USSD, panel web, VPN, seguridad, descarga de actualizaciones). Siempre con una notificación visible.</td>
+</tr>
+<tr>
+<td><code>RECEIVE_BOOT_COMPLETED</code></td>
+<td><span class="badge green">🟢 Normal</span></td>
+<td>Volver a encender esas funciones (seguridad, actualización automática) cuando reinicias el teléfono.</td>
+</tr>
+<tr>
+<td><code>WAKE_LOCK</code></td>
+<td><span class="badge green">🟢 Normal</span></td>
+<td>Que el teléfono no se duerma mientras el panel web local o una alarma están funcionando.</td>
+</tr>
+<tr>
+<td><code>REQUEST_IGNORE_BATTERY_OPTIMIZATIONS</code></td>
+<td><span class="badge orange">🟠 Especial</span></td>
+<td>Pedirte que Android no "mate" la app para ahorrar batería, para que la seguridad y las actualizaciones automáticas no se detengan.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="calendario">📅 Calendario</h2>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Permiso</th>
+<th>Tipo</th>
+<th>Para qué lo usa UtilEs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>READ_CALENDAR</code> / <code>WRITE_CALENDAR</code></td>
+<td><span class="badge red">🔴 Peligroso</span></td>
+<td>En el <strong>Portal</strong>, añadir a tu calendario la fecha de vencimiento de tu cuenta con un recordatorio un día antes, sin abrir la app de calendario.</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2 id="por-qu-algunos-antivirus-marcan-utiles-como-virus-o-riesgo">🦠 ¿Por qué algunos antivirus marcan UtilEs como "virus" o "riesgo"?</h2>
+<p>A veces un antivirus (o Google Play Protect) muestra un aviso como <em>"Riesgo"</em>, <em>"PUA"</em>, <em>"Riskware"</em>, <em>"Spyware"</em> o <em>"App peligrosa"</em>. <strong>Es un falso positivo</strong>: los antivirus no leen lo que hace la app, sino que buscan <strong>combinaciones de permisos y comportamientos</strong> que también usan las apps maliciosas. UtilEs usa muchas de esas combinaciones, pero para funciones útiles que tú activas.</p>
+<p>Estas son las razones más comunes:</p>
+<div class="tbl"><table>
+<thead>
+<tr>
+<th>Lo que ve el antivirus</th>
+<th>Por qué le parece sospechoso</th>
+<th>Para qué lo usa realmente UtilEs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Leer, recibir y enviar <strong>SMS</strong></td>
+<td>Algunos virus envían SMS de pago o roban códigos de verificación.</td>
+<td>Registro de SMS, alertas de seguridad sin Internet y comandos antirrobo por SMS desde <strong>tu</strong> número de confianza.</td>
+</tr>
+<tr>
+<td>Leer el <strong>registro de llamadas</strong> y <strong>contactos</strong></td>
+<td>Las apps espía roban esa información.</td>
+<td>Mostrar nombres en el Registro, historial de <code>*99</code> y autocompletar Transferencias. Todo se queda en el teléfono.</td>
+</tr>
+<tr>
+<td><strong>Marcar llamadas</strong> directamente (<code>CALL_PHONE</code>)</td>
+<td>Algunos virus llaman a números de pago.</td>
+<td>Marcar los códigos USSD de ETECSA (<code>*222#</code>, <code>*99</code>, etc.) con un toque.</td>
+</tr>
+<tr>
+<td><strong>Administrador del dispositivo</strong></td>
+<td>Los ransomware lo usan para bloquear el teléfono y pedir dinero.</td>
+<td>Seguridad antirrobo: bloquear <strong>tu</strong> teléfono a distancia si te lo roban.</td>
+</tr>
+<tr>
+<td><strong>Ubicación en segundo plano</strong></td>
+<td>Las apps espía rastrean a las personas.</td>
+<td>Encontrar tu teléfono perdido o robado.</td>
+</tr>
+<tr>
+<td><strong>Mostrar sobre otras apps</strong></td>
+<td>Algunos virus ponen pantallas falsas para robar contraseñas.</td>
+<td>Medidor de velocidad flotante y burbuja de tiempo de Nauta.</td>
+</tr>
+<tr>
+<td><strong>Leer notificaciones</strong></td>
+<td>Puede usarse para espiar mensajes.</td>
+<td>Historial de notificaciones, solo si tú lo activas.</td>
+</tr>
+<tr>
+<td><strong>VPN</strong> y ver <strong>todas las apps instaladas</strong></td>
+<td>Una VPN podría ver o desviar tu tráfico.</td>
+<td>VPN de UtilEs y Cortafuegos para bloquear Internet a las apps que elijas.</td>
+</tr>
+<tr>
+<td><strong>Bloquear llamadas</strong> y arrancar al <strong>encender el teléfono</strong></td>
+<td>Comportamiento típico de malware persistente.</td>
+<td>Bloqueo de llamadas no deseadas y reactivar la seguridad tras reiniciar.</td>
+</tr>
+<tr>
+<td>Aceptar <strong>certificados SSL no oficiales</strong></td>
+<td>Puede permitir espiar conexiones.</td>
+<td>El portal Nauta de ETECSA usa un certificado propio; sin esto no se podría iniciar sesión. Solo se aplica a ETECSA.</td>
+</tr>
+<tr>
+<td>La app <strong>no viene de Google Play</strong></td>
+<td>Los antivirus confían menos en APK instalados "a mano" y de desarrolladores poco conocidos.</td>
+<td>UtilEs se distribuye como APK porque Google Play no está disponible en Cuba.</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Una sola de estas cosas casi nunca provoca un aviso</strong>, pero el antivirus suma "puntos" por cada una, y UtilEs junta muchas en una sola app (USSD, seguridad, VPN, cortafuegos, registro…). Por eso algunos la marcan.</p>
+<h3>¿Qué puedo hacer?</h3>
+<ul>
+<li><strong>Descarga UtilEs solo desde los canales oficiales.</strong> Una copia modificada por otra persona <em>sí</em> podría ser peligrosa.</li>
+<li><strong>Concede solo los permisos de las funciones que uses.</strong> Si no usas Seguridad, no actives el administrador del dispositivo ni la ubicación en segundo plano.</li>
+<li>Si Play Protect avisa, puedes tocar <strong>"Más detalles" → "Instalar de todas formas"</strong>.</li>
+<li>Si tu antivirus la bloquea, puedes añadirla a sus <strong>excepciones</strong> o enviarla al fabricante del antivirus como <strong>falso positivo</strong> para que la revisen.</li>
+</ul>
+<hr />
+<h2 id="preguntas-frecuentes">Preguntas frecuentes</h2>
+<p><strong>¿Por qué la app pide varios permisos al abrirla por primera vez?</strong>
+Se piden una sola vez para que las funciones principales (USSD, contactos, saldo) funcionen desde el inicio. Puedes rechazar los que no quieras.</p>
+<p><strong>¿UtilEs vende o comparte mis datos?</strong>
+No. Los contactos, SMS, llamadas y ubicación se usan solo en tu teléfono. Solo se envía información por Internet cuando tú usas una función que lo necesita, como el panel web de seguridad, el foro, o un reporte u opinión que tú decides enviar.</p>
+<p><strong>¿Qué pasa si quito un permiso?</strong>
+Solo deja de funcionar la opción que lo usa. Por ejemplo, sin <code>READ_CONTACTS</code> verás números en vez de nombres.</p></article></main>
+<footer>apputiles.com · <a href="./">Volver al inicio</a></footer>
+</body></html>
