@@ -1,9 +1,9 @@
 {
-  "version": "2.3.5",
+  "version": "2.3.8",
   "size": "23.4 MB",
   "changelog": [
-    "Adicionado captura de la notificación del portal cautivo",
-    "Adicionado sistema de proteccion y/o antirobo del telefono",
-    "AAdicionado sistema de recompensas o puntos en UtilEs"
+    "Adicionado guardado de datos para Dual SIM",
+    "Adicionado reseña",
+    "Errores arreglados"
   ]
 }
